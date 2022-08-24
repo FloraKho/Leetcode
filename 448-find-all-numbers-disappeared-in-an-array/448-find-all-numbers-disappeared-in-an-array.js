@@ -8,11 +8,13 @@ var findDisappearedNumbers = function(nums) {
     //check if the number is within the range
     //if not, add it to a new array
   
-    const result = [];
-    for (let i = 1; i <= nums.length; i++){
-        if(!nums.includes(i)){
-            result.push(i);
+    const set = new Set(nums);
+    console.log(set);
+    const newArr = [];
+    for(let i = 1; i <= nums.length; i++){
+        if(!set.has(i)){
+            newArr.push(i);
         }
     }
-    return result;
+    return newArr;
 };
