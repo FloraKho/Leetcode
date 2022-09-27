@@ -1,38 +1,19 @@
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
-        charFreq = {} # Keep track of all characters in s1 and their frequency
-        for char in s1:
-            if char not in charFreq:
-                charFreq[char] = 0
-            charFreq[char] += 1
+        n = len(s1)
+        h2 = [0] * 26
+        h1 = [0] * 26
         
-        matched = 0 # Keep track of how many characters in charFreq we have completely found
-        windowStart = 0
-        
-        for windowEnd in range(len(s2)):
-            char = s2[windowEnd] # Current character we are on
+        for c in s1:
+            h1[ord(c) - ord('a')] += 1
             
-            if char in charFreq:
-                charFreq[char] -= 1
-                # If we found all instances of this character
-                if charFreq[char] == 0:
-                    matched += 1 # Increment matched by 1 since we have matched this character
+        for i in range(len(s2)):
+            if i < n:
+                h2[ord(s2[i]) - ord('a')] += 1
+            else:
+                h2[ord(s2[i]) - ord('a')] += 1
+                h2[ord(s2[i - n]) - ord('a')] -= 1
             
-            # If our window size exceeds the size of s1 we need to shrink our window
-            while (windowEnd - windowStart + 1) > len(s1):
-                remove = s2[windowStart]
-                
-                if remove in charFreq:
-                    # We are removing this character from our window
-                    # If we reach the point where we are adding characters back into charFreq
-                    # then we must decrement matched since we no longer are matching that character fully
-                    if charFreq[remove] == 0:
-                        matched -= 1
-                    charFreq[remove] += 1
-                windowStart += 1
-            
-            # If the matched count is equal to the total number of characters in charFreq
-            # then we have matched every character, hence we found a permutation
-            if matched == len(charFreq):
+            if h1 == h2:
                 return True
         return False
