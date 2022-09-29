@@ -1,14 +1,12 @@
 class Solution:
-    def dailyTemperatures(self, T):
-        ans = [0]*len(T) 
-        stack = []
-    
-        for i,v in enumerate(T):
-        #check whether current val is greater than the last appended stack value.  We will pop all the elements which is lesser than the current temp
-            while stack and stack[-1][1] < v:
-                index,value = stack.pop()
-                ans[index] = i - index # we are checking how many indices we 
-            stack.append([i,v])      
-        return ans
-	
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        res = [0] * len(temperatures)
+        stack = []  # pair: [temp, index]
+
+        for i in range(len(temperatures)):
+            while stack and temperatures[i] > temperatures[stack[-1]]:
+                cur = stack.pop()
+                res[cur] = i - cur
+            stack.append(i)
+        return res
         
