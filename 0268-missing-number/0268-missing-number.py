@@ -9,6 +9,7 @@ class Solution:
         #return missing number
         
         num_set = set(nums)
+        print(num_set)
         n = len(nums) + 1
         for number in range(n):
             if number not in num_set:
