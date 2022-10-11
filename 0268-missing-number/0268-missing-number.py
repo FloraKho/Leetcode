@@ -7,7 +7,6 @@ class Solution:
         #using for...in... method
         #if the number is not in set
         #return missing number
-        
         num_set = set(nums)
         n = len(nums) + 1
         for number in range(n):
