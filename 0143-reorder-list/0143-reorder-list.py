@@ -9,16 +9,17 @@ class Solution:
         Do not return anything, modify head in-place instead.
         """
         #find middle
-        slow = fast = head
-        
+        slow, fast = head, head.next
         
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
-            
+        # print(slow)
         #reverse second half
         second = slow.next
+        # print(second)
         prev = slow.next = None
+        # print(prev)
         while second:
             tmp = second.next
             second.next = prev
