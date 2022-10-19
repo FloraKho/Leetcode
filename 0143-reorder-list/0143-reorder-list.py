@@ -9,7 +9,8 @@ class Solution:
         Do not return anything, modify head in-place instead.
         """
         #find middle
-        slow, fast = head, head.next
+        slow = fast = head
+        
         
         while fast and fast.next:
             slow = slow.next
