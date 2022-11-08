@@ -1,19 +1,22 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        #create an empty array for collect answer
+        res = []
         
-        def backtrack(g, i, target):
-            if target == 0:
-                ans.append(g)
-            elif target < candidates[i]:
+        #backtrack
+        def dfs(i, cur, total):
+            if total == target:
+                #if combination equal to target, add it to res
+                res.append(cur.copy())
                 return
-            for j in range(i, n):
-                backtrack(g + [candidates[j]], j, target - candidates[j])
-                
-        ans = []
-        
-        n = len(candidates)
-        candidates.sort()
-        backtrack([], 0, target)
-        return ans
-    
-    
+            if i >= len(candidates) or total > target:
+                #stop recursion
+                return
+            
+            cur.append(candidates[i])
+            dfs(i, cur, total + candidates[i])
+            cur.pop()
+            dfs(i+1, cur, total)
+            
+        dfs(0, [], 0)
+        return res
